@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <span id="numActual">Apagado</span>
+    <div>
+        <button id="btn1">1</button>
+        <button id="btn2">2</button>
+        <button id="btn3">3</button>
+        <button id="btn4">4</button>
+        <button id="btn5">5</button>
+        <button id="btn6">6</button>
+        <button id="btn7">7</button>
+        <button id="btn8">8</button>
+        <button id="btn9">9</button>
+    </div>
+    <button>Apagar</button>
+</body>
+
+
+<script>
+    function numActual(msg) {
+        document.querySelector("span#numActual").innerText = msg;
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const botones = document.querySelectorAll("button");
+        botones.forEach((btn) => {
+            btn.addEventListener("click", (e) => {
+                e.preventDefault();
+                let comando = e.currentTarget.innerText;
+                if(isNaN(comando)) {
+                    fetch("/api/apagar").then((r) => r.json()).finally(numActual("Apagado"));
+                }
+                else {
+                    fetch(`/api/btn?n=${comando}`).then((r) => r.json()).finally(numActual(comando));
+                }
+            })
+        })
+    })
+</script>
+
+</html>
