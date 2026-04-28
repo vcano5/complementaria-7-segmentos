@@ -18,44 +18,172 @@
 \newpage
 \section{Instrucciones}
     \begin{enumerate}
-    \item{Identificar los requisitos del sistema mediante una lista:}
-    \begin{itemize}
-        \item{¿Qué debe hacer el sistema?}
-        \item{¿Qué entradas tendrá?}
-        \item{¿Qué salidas genera?}
-    \end{itemize}
-    \item{Definir el léxico del sistema con al menos 5 términos}
-    \item{Elaborar el modelo entrada-proceso-salida}
-    \item{Realizar la tabla de verdad del display}
-    \item{Conectar el display de 7 segmentos al Arduino}
-    \item{Programar Arduino para mostrar números del 0 al 9}
-    \item{Crear una página web que contenga:}
-    \begin{itemize}
-        \item{Botones del 0 al 9}
-        \item{Visualización del número seleccionado}
-    \end{itemize}
-    \item{Programar un servidor que:}
-    \begin{itemize}
-        \item{Reciba el número desde la web}
-        \item{Envíe el dato por comunicación serial (9600 baudios)}
-    \end{itemize}
-    \item{Verificar que:}
-    \begin{itemize}
-        \item{El número cambia en la página web}
-        \item{El número cambia en el display físico}
-    \end{itemize}
-    \item{Elaborar los siguientes modelos del sistema:}
-    \begin{itemize}
-        \item{Diagrama de estados}
-        \item{Caso de uso}
-        \item{Diagrama de actividades}
-    \end{itemize}
-    \item{Redactar una historia de usuario}
-    \item{Describir el prototipo del sistema (hardware y software).}
+        \item{Identificar los requisitos del sistema mediante una lista:}
+            \begin{itemize}
+                \item ¿Qué debe hacer el sistema? 
+                \item ¿Qué entradas tendrá?
+                \item ¿Qué salidas genera?
+            \end{itemize}
+        \item Definir el léxico del sistema con al menos 5 términos
+        \item Elaborar el modelo entrada-proceso-salida
+        \item Realizar la tabla de verdad del display
+        \item Conectar el display de 7 segmentos al Arduino
+        \item Programar Arduino para mostrar números del 0 al 9
+        \item Crear una página web que contenga:
+            \begin{itemize}
+                \item Botones del 0 al 9
+                \item Visualización del número seleccionado
+            \end{itemize}
+        \item Programar un servidor que:
+            \begin{itemize}
+                \item Reciba el número desde la web
+                \item Envíe el dato por comunicación serial (9600 baudios)
+            \end{itemize}
+        \item Verificar que:
+            \begin{itemize}
+                \item El número cambia en la página web
+                \item El número cambia en el display físico
+            \end{itemize}
+        \item Elaborar los siguientes modelos del sistema:
+            \begin{itemize}
+                \item Diagrama de estados
+                \item Caso de uso
+                \item Diagrama de actividades
+            \end{itemize}
+        \item Redactar una historia de usuario
+        \item Describir el prototipo del sistema (hardware y software).
     \end{enumerate}
+
 \section{Requisitos del sistema}
     \subsection{¿Qué debe hacer el sistema?}
-    \subsection{¿Qué entradas tendrá?}
-    \subsection{¿Qué salidas generá?}
+        El sistema debe permitir al usuario seleccionar un número del 0 al 9 desde una página web y mostrarlo en un display de 7 segmentos conectado a un Arduino.
 
+    \subsection{¿Qué entradas tendrá?}
+        \begin{itemize}
+            \item Selección de número (0-9) desde la página web
+            \item Selección de apagado desde la página web
+            \item Entrada de datos por medio de comunicación serial hacia el Arduino
+        \end{itemize}
+        
+    \subsection{¿Qué salidas generá?}
+        \begin{itemize}
+            \item Visualización del número seleccionado en la página web
+            \item Visualización del número en el display de 7 segmentos
+        \end{itemize}
+
+
+\section{Léxico del sistema}
+    \subsection{Arduino}
+    Microcontrolador que recibe datos y controla el display.
+
+    \subsection{Display de 7 segmentos}
+    Dispositivo electrónico que muestra números mediante LEDs.
+
+    \subsection{Comunicación Serial}
+    Método de transmisión de datos entre el servidor y Arduino (9600 baudios).
+
+    \subsection{Servidor}
+    Programa que recibe datos de la web y los envía al Arduino.
+
+    \subsection{Baudios}
+    Velocidad de transmición de datos (bits por segundo).
+
+
+\section{Modelo Entrada-Proceso-Salida}
+    \subsection{Entrada}
+    Usuario selecciona un número en la página web
+
+    \subsection{Proceso}
+        \begin{enumerate}
+            \item La web envía el número al servidor
+            \item El servidor lo procesa
+            \item El servidor lo envía por serial al Arduino
+            \item Arduino interpreta el número
+            \item Arduino activa los segmentos correspondientes
+        \end{enumerate}
+    
+    \subsection{Salida}
+        \begin{itemize}
+            \item Número mostrado en la interfaz web
+            \item Número mostrado en el display físico
+        \end{itemize}
+
+\section{Tabla de verdad del display (Cátodo común)}
+    \begin{table}[]
+        \begin{tabular}{clllllll}
+            \multicolumn{1}{l}{\textbf{Display}} & \textbf{a} & \textbf{b} & \textbf{c} & \textbf{d} & \textbf{e} & \textbf{f} & \textbf{g} \\
+                Apagado                              & 0          & 0          & 0          & 0          & 0          & 0          & 0          \\
+                0                                    & 1          & 1          & 1          & 1          & 1          & 1          & 0          \\
+                1                                    & 0          & 1          & 1          & 0          & 0          & 0          & 0          \\
+                2                                    & 1          & 1          & 0          & 1          & 1          & 0          & 1          \\
+                3                                    & 1          & 1          & 1          & 1          & 0          & 0          & 1          \\
+                4                                    & 0          & 1          & 1          & 0          & 0          & 1          & 1          \\
+                5                                    & 1          & 0          & 1          & 1          & 0          & 1          & 1          \\
+                6                                    & 1          & 0          & 1          & 1          & 1          & 1          & 1          \\
+                7                                    & 1          & 1          & 1          & 0          & 0          & 0          & 0          \\
+                8                                    & 1          & 1          & 1          & 1          & 1          & 1          & 1          \\
+                9                                    & 1          & 1          & 1          & 1          & 0          & 1          & 1         
+        \end{tabular}
+    \end{table}
+
+\section{Conexión del display al Arduino}
+    \begin{itemize}
+        \item Cada segmento (a-g) se conecta a un pin dígital (ej: a=2, b=3..., g=8)
+        \item Se usan resistencias (470 $\Omega$)
+        \item El cátodo común va a GND
+    \end{itemize}
+
+\section{Verificación}
+    \begin{itemize}
+        \item Al presionar botón cambia en web
+        \item Se envia al servidor
+        \item Arduino recibe el evento
+        \item Display muestra número
+    \end{itemize}
+
+\section{Modelos del sistema}
+    \subsection{Diagrama de estados}
+        \begin{enumerate}
+            \item Espera
+            \item Recibe número
+            \item Procesa
+            \item Muestra
+            \item Espera
+        \end{enumerate}
+    \subsection{Casos de uso}
+        \begin{itemize}
+            \item Actor: Usuario
+            \item Acción: Seleccionar número
+            \item Resultado: Número mostrado en display
+        \end{itemize}
+    \subsection{Diagrama de actividades}
+        \begin{enumerate}
+            \item Inicio
+            \item Selección
+            \item Envío
+            \item Procesamiento
+            \item Visualización
+            \item Fin
+        \end{enumerate}
+
+\section{Historia de usuario}
+Como usuario, quiero seleccionar un número desde una página web para que se meustre en un display fisico conectado a un Arduino en tiempo real.
+
+\section{Descripción del proyecto}
+    \subsection{Hardware}
+        \begin{itemize}
+            \item Arduino Uno
+            \item Display de 7 segmentos
+            \item 8 Resistencias de 470 $\Omega$
+            \item Cables Dupont
+            \item Protoboard
+            \item Cable para conexión USB Arduino
+        \end{itemize}
+
+    \subsection{Software}
+        \begin{itemize}
+            \item Código en Arduino
+            \item Servidor en Python (Flask)
+            \item Página web (HTML, JS)
+        \end{itemize}
 \end{document}
